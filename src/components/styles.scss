@@ -1,0 +1,99 @@
+@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lato", sans-serif;
+}
+
+.wrapper {
+  display: inline-flex;
+  background: #fff;
+  height: 100px;
+  width: 400px;
+  align-items: center;
+  justify-content: start;
+  border-radius: 5px;
+  padding: 20px 15px;
+  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
+}
+
+.wrapper .option {
+  background: #fff;
+  height: 100%;
+  width: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  margin: 0 10px;
+  flex-shrink: 0;
+  border-radius: 5px;
+  cursor: pointer;
+  padding: 0 10px;
+  border: 2px solid lightgrey;
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.slide-fade-enter, .slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(-100px);
+  opacity: 0;
+}
+
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.operator-slide-fade-enter-active {
+  transition: all 0.3s ease;
+}
+
+.operator-slide-fade-leave-active {
+  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+}
+
+.operator-slide-fade-enter, .operator-slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(100px);
+  opacity: 0;
+}
+
+.wrapper .operator {
+  width: 100%;
+}
+
+input[type="radio"] {
+  display: none;
+}
+
+#option-1:checked:checked ~ .option-1 {
+  border-color: #95d470;
+  background: #95d470;
+}
+
+#option-2:checked:checked ~ .option-2 {
+  border-color: #ec6262;
+  background: #ec6262;
+}
+
+#option-3:checked:checked ~ .option-3 {
+  border-color: #cecccc;
+  background: #cecccc;
+}
+
+.wrapper .option span {
+  font-size: 20px;
+  color: #808080;
+}
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span {
+  color: #fff;
+}

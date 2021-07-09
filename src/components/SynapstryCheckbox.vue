@@ -22,35 +22,49 @@
         id="option-3"
         v-model="radioValue"
       />
-      <label for="option-1" class="option option-1">
-        <div class="dot"></div>
-        <span>OK</span>
-      </label>
-      <label for="option-2" class="option option-2">
-        <div class="dot"></div>
-        <span>NOK</span>
-      </label>
-      <label for="option-3" class="option option-3">
-        <div class="dot"></div>
-        <span>N/A</span>
-      </label>
+      <transition name="slide-fade">
+        <label for="option-1" v-show="condition('ok')" class="option option-1">
+          <span>OK</span>
+        </label>
+      </transition>
+      <transition name="slide-fade">
+        <label for="option-2" v-show="condition('nok')" class="option option-2">
+          <span>NOK</span>
+        </label>
+      </transition>
+      <transition name="slide-fade">
+        <label for="option-3" v-show="condition('na')" class="option option-3">
+          <span>N/A</span>
+        </label>
+      </transition>
+      <transition name="operator-slide-fade">
+        <div v-if="radioValue != ''" id="operatordiv" class="operator">
+          <span>
+            J. Smith
+            <br />
+            Operator
+          </span>
+        </div>
+      </transition>
     </div>
     <br />
     <button @click="resetCheckbox">Reset checkbox</button>
     <br />
+
     {{ radioValue }}
+    <div id="example-1">
+      <button @click="show = !show">
+        Toggle render
+      </button>
+      <transition name="slide-fade">
+        <p v-if="show">hello</p>
+      </transition>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
-import {
-  defineComponent,
-  onMounted,
-  PropType,
-  reactive,
-  ref,
-  watch,
-} from "@vue/composition-api";
+import { defineComponent, reactive, ref } from "@vue/composition-api";
 
 export default defineComponent({
   name: "Checkbox",
@@ -59,120 +73,26 @@ export default defineComponent({
     msg: String,
   },
   setup() {
-    const visibleItems = reactive({
-      item1: true,
-      item2: true,
-      item3: true,
-    });
     const radioValue = ref("");
-
+    const show = ref(true);
     const resetCheckbox = () => {
       radioValue.value = "";
     };
 
-    return { visibleItems, radioValue, resetCheckbox };
+    const condition = (val: string): boolean => {
+      if (radioValue.value == "" || radioValue.value == val) {
+        return true;
+      } else {
+        return false;
+      }
+    };
+
+    return { show, radioValue, resetCheckbox, condition };
   },
 });
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Lato", sans-serif;
-}
-html,
-body {
-  display: grid;
-  height: 100%;
-  place-items: center;
-  background: #0069d9;
-  font-family: "Lato", sans-serif;
-}
-.wrapper {
-  display: inline-flex;
-  background: #fff;
-  height: 100px;
-  width: 400px;
-  align-items: center;
-  justify-content: space-evenly;
-  border-radius: 5px;
-  padding: 20px 15px;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-}
-.wrapper .option {
-  background: #fff;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  margin: 0 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0 10px;
-  border: 2px solid lightgrey;
-  transition: all 1.1s ease;
-}
-.wrapper .option .dot {
-  height: 20px;
-  width: 20px;
-  background: #d9d9d9;
-  border-radius: 50%;
-  position: relative;
-}
-.wrapper .option .dot::before {
-  position: absolute;
-  content: "";
-  top: 4px;
-  left: 4px;
-  width: 12px;
-  height: 12px;
-  background: #696969;
-  border-radius: 50%;
-  opacity: 0;
-  transform: scale(1.5);
-  transition: all 1.3s ease;
-}
-input[type="radio"] {
-  display: none;
-}
-
-#option-1:checked:checked ~ .option-1 {
-  border-color: #95d470;
-  background: #95d470;
-}
-
-#option-2:checked:checked ~ .option-2 {
-  border-color: #ec6262;
-  background: #ec6262;
-}
-
-#option-3:checked:checked ~ .option-3 {
-  border-color: #cecccc;
-  background: #cecccc;
-}
-
-#option-1:checked:checked ~ .option-1 .dot,
-#option-2:checked:checked ~ .option-2 .dot,
-#option-3:checked:checked ~ .option-3 .dot {
-  background: #fff;
-}
-#option-1:checked:checked ~ .option-1 .dot::before,
-#option-2:checked:checked ~ .option-2 .dot::before,
-#option-3:checked:checked ~ .option-3 .dot::before {
-  opacity: 1;
-  transform: scale(1);
-}
-.wrapper .option span {
-  font-size: 20px;
-  color: #808080;
-}
-#option-1:checked:checked ~ .option-1 span,
-#option-2:checked:checked ~ .option-2 span {
-  color: #fff;
-}
+@import "styles.scss";
 </style>
