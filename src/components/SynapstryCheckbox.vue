@@ -22,22 +22,34 @@
         id="option-3"
         v-model="radioValue"
       />
-      <transition name="slide-fade">
-        <label for="option-1" v-show="condition('ok')" class="option option-1">
-          <span>OK</span>
-        </label>
-      </transition>
-      <transition name="slide-fade">
-        <label for="option-2" v-show="condition('nok')" class="option option-2">
-          <span>NOK</span>
-        </label>
-      </transition>
-      <transition name="slide-fade">
-        <label for="option-3" v-show="condition('na')" class="option option-3">
-          <span>N/A</span>
-        </label>
-      </transition>
-      <transition name="operator-slide-fade">
+      <label
+        for="option-1"
+        v-bind:class="radioValue == 'ok' ? leaveTransition : 'slide-fade'"
+        v-show="condition('ok')"
+        class="option option-1"
+      >
+        <span>OK</span>
+      </label>
+
+      <label
+        for="option-2"
+        v-bind:class="radioValue == 'nok' ? leaveTransition : 'slide-fade'"
+        v-show="condition('nok')"
+        class="option option-2"
+      >
+        <span>NOK</span>
+      </label>
+
+      <label
+        for="option-3"
+        v-bind:class="radioValue == 'na' ? leaveTransition : 'slide-fade'"
+        v-show="condition('na')"
+        class="option option-3"
+      >
+        <span>N/A</span>
+      </label>
+
+      <!-- <transition name="operator-slide-fade">
         <div v-if="radioValue != ''" id="operatordiv" class="operator">
           <span>
             J. Smith
@@ -45,7 +57,7 @@
             Operator
           </span>
         </div>
-      </transition>
+      </transition> -->
     </div>
     <br />
     <button @click="resetCheckbox">Reset checkbox</button>
@@ -64,7 +76,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive, ref } from "@vue/composition-api";
+import { defineComponent, ref } from "@vue/composition-api";
 
 export default defineComponent({
   name: "Checkbox",
@@ -78,7 +90,7 @@ export default defineComponent({
     const resetCheckbox = () => {
       radioValue.value = "";
     };
-
+    const leaveTransition = "leaveTransitionCss";
     const condition = (val: string): boolean => {
       if (radioValue.value == "" || radioValue.value == val) {
         return true;
@@ -87,7 +99,7 @@ export default defineComponent({
       }
     };
 
-    return { show, radioValue, resetCheckbox, condition };
+    return { show, leaveTransition, radioValue, resetCheckbox, condition };
   },
 });
 </script>
