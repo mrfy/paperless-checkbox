@@ -13,6 +13,30 @@
 .checkbox-wrapper label:first-of-type {
   border-radius: 5px 0 0 5px;
 }
+*/ .wrapper {
+  display: flex;
+  > * {
+    flex: 1 1 0%;
+    overflow: hidden;
+  }
+  .subContainer {
+    margin: 10px;
+    background-color: white;
+    min-height: 200px;
+    padding: 1rem;
+    /* prevent text wrapping during transition? */
+    min-width: 300px;
+  }
+  .left {
+    background-color: blue;
+  }
+  .right {
+    background-color: red;
+  }
+  .container {
+    background-color: white;
+  }
+}
 
 .checkbox-wrapper label:last-of-type {
   border-radius: 0 5px 5px 0;
