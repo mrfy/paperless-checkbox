@@ -5,18 +5,43 @@
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
 }
-
+/*
 .wrapper {
   display: inline-flex;
   background: rgb(205, 226, 214);
   height: 100px;
   width: 400px;
-
   border-radius: 5px;
   padding: 20px 15px;
   box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
 }
+*/
+.wrapper {
+  display: flex;
+  > * {
+    flex: 1 1 0%;
+    overflow: hidden;
+  }
+  .subContainer {
+    margin: 10px;
+    background-color: white;
+    min-height: 200px;
+    padding: 1rem;
+    /* prevent text wrapping during transition? */
+    min-width: 300px;
+  }
+  .left {
+    background-color: blue;
+  }
+  .right {
+    background-color: red;
+  }
+  .container {
+    background-color: white;
+  }
+}
 
+/*
 .wrapper .option {
   background: #fff;
   height: 100%;
@@ -24,45 +49,24 @@
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  margin: 0 10px;
   flex-shrink: 0;
   border-radius: 5px;
   cursor: pointer;
-  padding: 0 10px;
-  border: 2px solid lightgrey;
+  padding: 0 0px;
+}
+*/
+.goingHome-leave-active {
+  transition: all 1s ease;
+  overflow: hidden;
+  max-width: 100px;
+  border: 0px;
 }
 
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
-.slide-fade-enter-active {
-  transition: all 0.3s ease;
-}
-
-/* The animation code */
-@keyframes mymove {
-  from {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(0%);
-  }
-}
-
-.leaveTransitionCss {
-  font-style: oblique;
-  transform: translateX(-100px);
-  transition: all 1s ease-in-out;
-}
-
-.slide-fade-leave-active {
-  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
-}
-
-.slide-fade-enter, .slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
-  transform: translateX(-100px);
-  opacity: 0;
+.goingHome-leave-to {
+  opacity: 0.6;
+  max-width: 0;
+  padding: 0 0px;
+  border: 0px;
 }
 
 /* Enter and leave animations can use different */

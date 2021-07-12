@@ -22,33 +22,34 @@
         id="option-3"
         v-model="radioValue"
       />
-      <label
-        for="option-1"
-        v-bind:class="radioValue == 'ok' ? leaveTransition : 'slide-fade'"
-        v-show="condition('ok')"
-        class="option option-1"
+      <transition
+        @after-enter="transitionComplete"
+        mode="out-in"
+        name="goingHome"
       >
-        <span>OK</span>
-      </label>
-
-      <label
-        for="option-2"
-        v-bind:class="radioValue == 'nok' ? leaveTransition : 'slide-fade'"
-        v-show="condition('nok')"
-        class="option option-2"
+        <label for="option-1" v-show="condition('ok')" class="option option-1">
+          <span>OK</span>
+        </label>
+      </transition>
+      <transition
+        mode="out-in"
+        @after-enter="transitionComplete"
+        name="goingHome"
       >
-        <span>NOK</span>
-      </label>
-
-      <label
-        for="option-3"
-        v-bind:class="radioValue == 'na' ? leaveTransition : 'slide-fade'"
-        v-show="condition('na')"
-        class="option option-3"
+        <label for="option-2" v-show="condition('nok')" class="option option-2">
+          <span>NOK</span>
+        </label>
+      </transition>
+      <transition
+        mode="out-in"
+        @after-enter="transitionComplete"
+        name="goingHome"
       >
-        <span>N/A</span>
-      </label>
-
+        <label for="option-3" v-show="condition('na')" class="option option-3">
+          <span>N/A</span>
+        </label>
+      </transition>
+      <!-- v-bind:class="classSelector('na')" -->
       <!-- <transition name="operator-slide-fade">
         <div v-if="radioValue != ''" id="operatordiv" class="operator">
           <span>
@@ -76,30 +77,64 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from "@vue/composition-api";
+import { computed, defineComponent, ref } from "@vue/composition-api";
 
 export default defineComponent({
   name: "Checkbox",
   template: "#Syn-Checkbox-Button",
   props: {
-    msg: String,
+    radioValue: {
+      type: String,
+      default: "",
+    },
   },
-  setup() {
-    const radioValue = ref("");
+  setup(props) {
     const show = ref(true);
-    const resetCheckbox = () => {
-      radioValue.value = "";
-    };
     const leaveTransition = "leaveTransitionCss";
+    const activateTransition = "activateTransitionCss";
+
     const condition = (val: string): boolean => {
-      if (radioValue.value == "" || radioValue.value == val) {
+      if (props.radioValue == "" || props.radioValue == val) {
         return true;
       } else {
         return false;
       }
     };
+    const resetCheckbox = () => {
+      props.radioValue = "";
+    };
+    const classSelector = (val: string): string => {
+      if (props.radioValue != "" && props.radioValue == val) {
+        return activateTransition;
+      } else if (props.radioValue != "" && props.radioValue != val) {
+        return leaveTransition;
+      } else {
+        return "";
+      }
+    };
 
-    return { show, leaveTransition, radioValue, resetCheckbox, condition };
+    const leave = (el: any) => {
+      console.log("leave!! :>> ", el);
+    };
+
+    const transition = computed((): string => {
+      return props.radioValue != "" ? "no" : "";
+    });
+
+    const transitionComplete = (el: any) => {
+      console.log("transitionCompletd :>> ", el);
+      // for passed 'el' that DOM element as the argument, something ...
+    };
+
+    return {
+      transitionComplete,
+      transition,
+      leave,
+      show,
+      resetCheckbox,
+      condition,
+      classSelector,
+    };
   },
 });
 </script>
