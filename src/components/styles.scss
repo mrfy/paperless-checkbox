@@ -1,118 +1,115 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
 }
-/*
-.wrapper {
-  display: inline-flex;
-  background: rgb(205, 226, 214);
-  height: 100px;
-  width: 400px;
-  border-radius: 5px;
-  padding: 20px 15px;
-  box-shadow: 5px 5px 30px rgba(0, 0, 0, 0.2);
-}
-*/
+
 .wrapper {
   display: flex;
-  > * {
-    flex: 1 1 0%;
-    overflow: hidden;
-  }
-  .subContainer {
-    margin: 10px;
-    background-color: white;
-    min-height: 200px;
-    padding: 1rem;
-    /* prevent text wrapping during transition? */
-    min-width: 300px;
-  }
-  .left {
-    background-color: blue;
-  }
-  .right {
-    background-color: red;
-  }
-  .container {
-    background-color: white;
-  }
+  margin: auto auto;
+  height: 44px;
+  width: 300px;
+  border-radius: 15px;
 }
 
-/*
-.wrapper .option {
+.flex-label {
+  border: 1px solid rgba(0, 0, 0, 0.2);
   background: #fff;
-  height: 100%;
-  width: 100px;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  flex-shrink: 0;
-  border-radius: 5px;
-  cursor: pointer;
-  padding: 0 0px;
-}
-*/
-.goingHome-leave-active {
-  transition: all 1s ease;
+  flex: 1 0 1em;
   overflow: hidden;
   max-width: 100px;
-  border: 0px;
+  margin-right: -1px;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+.wrapper label:first-of-type {
+  border-radius: 9px 0 0 9px;
+}
+
+.wrapper label:last-of-type {
+  border-radius: 0 9px 9px 0;
+}
+
+.wrapper span {
+  text-align: center;
+}
+
+.wrapper label:hover {
+  cursor: pointer;
+}
+
+.operator {
+  margin: auto auto;
+  flex: 1 0 1em;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0 9px 9px 0;
+}
+
+.goingHome-leave-active {
+  transition: all 0.25s ease;
+}
+.goingHome-enter,
 .goingHome-leave-to {
-  opacity: 0.6;
-  max-width: 0;
-  padding: 0 0px;
-  border: 0px;
+  flex: 0 1 0em;
+  opacity: 0.3;
 }
 
+.goingHome-enter-to {
+  opacity: 1;
+}
+
+.goingHome-enter-active {
+  transition: all 0.25s ease;
+}
+
+.activateTransitionCss {
+  min-width: 100px;
+  border-radius: 9px 0 0 9px !important;
+}
 /* Enter and leave animations can use different */
 /* durations and timing functions.              */
 .operator-slide-fade-enter-active {
-  transition: all 0.3s ease;
+  transition: all 0.25s ease;
 }
 
 .operator-slide-fade-leave-active {
-  transition: all 0.2s cubic-bezier(1, 0.5, 0.8, 1);
+  transition: all 0.25s ease;
 }
 
 .operator-slide-fade-enter, .operator-slide-fade-leave-to
 /* .slide-fade-leave-active below version 2.1.8 */ {
   transform: translateX(100px);
+  overflow: hidden;
   opacity: 0;
-}
-
-.wrapper .operator {
-  width: 100%;
 }
 
 input[type="radio"] {
   display: none;
 }
 
-#option-1:checked:checked ~ .option-1 {
-  border-color: #95d470;
-  background: #95d470;
+.opt-ok:hover {
+  stroke-width: 2px;
+  stroke: green;
 }
 
-#option-2:checked:checked ~ .option-2 {
-  border-color: #ec6262;
-  background: #ec6262;
+.opt-nok:hover {
+  stroke-width: 2px;
+  stroke: red;
 }
 
-#option-3:checked:checked ~ .option-3 {
-  border-color: #cecccc;
-  background: #cecccc;
+.opt-na:hover {
+  font-weight: 1000;
 }
 
-.wrapper .option span {
-  font-size: 20px;
-  color: #808080;
-}
 #option-1:checked:checked ~ .option-1 span,
 #option-2:checked:checked ~ .option-2 span {
   color: #fff;
+}
+
+.logo-img path {
+  fill: rgb(175, 62, 62);
 }

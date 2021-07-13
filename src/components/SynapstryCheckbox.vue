@@ -1,56 +1,56 @@
 <template id="Syn-Checkbox-Button">
   <div>
     <div class="wrapper">
-      <input
-        type="radio"
-        name="select"
-        value="ok"
-        id="option-1"
-        v-model="radioValue"
-      />
-      <input
-        type="radio"
-        name="select"
-        value="nok"
-        id="option-2"
-        v-model="radioValue"
-      />
-      <input
-        type="radio"
-        name="select"
-        value="na"
-        id="option-3"
-        v-model="radioValue"
-      />
-      <transition
-        @after-enter="transitionComplete"
-        mode="out-in"
-        name="goingHome"
-      >
-        <label for="option-1" v-show="condition('ok')" class="option option-1">
-          <span>OK</span>
+      <transition name="goingHome">
+        <label
+          class="flex-label opt-ok"
+          v-bind:class="classSelector('ok')"
+          v-show="condition('ok')"
+        >
+          <checkmarkSVGComponent />
+          <input
+            name="select"
+            type="radio"
+            value="ok"
+            id="option-1"
+            v-model="radioValue"
+          />
         </label>
       </transition>
-      <transition
-        mode="out-in"
-        @after-enter="transitionComplete"
-        name="goingHome"
-      >
-        <label for="option-2" v-show="condition('nok')" class="option option-2">
-          <span>NOK</span>
+
+      <transition name="goingHome">
+        <label
+          class="flex-label opt-nok"
+          v-bind:class="classSelector('nok')"
+          v-show="condition('nok')"
+        >
+          <nokSVGComponent />
+          <input
+            name="select"
+            type="radio"
+            value="nok"
+            id="option-2"
+            v-model="radioValue"
+          />
         </label>
       </transition>
-      <transition
-        mode="out-in"
-        @after-enter="transitionComplete"
-        name="goingHome"
-      >
-        <label for="option-3" v-show="condition('na')" class="option option-3">
-          <span>N/A</span>
+      <transition name="goingHome">
+        <label
+          class="flex-label opt-na"
+          v-bind:class="classSelector('na')"
+          v-show="condition('na')"
+          >N/A
+          <input
+            name="select"
+            type="radio"
+            value="na"
+            id="option-3"
+            v-model="radioValue"
+          />
         </label>
       </transition>
-      <!-- v-bind:class="classSelector('na')" -->
-      <!-- <transition name="operator-slide-fade">
+
+      <transition name="operator-slide-fade">
         <div v-if="radioValue != ''" id="operatordiv" class="operator">
           <span>
             J. Smith
@@ -58,7 +58,7 @@
             Operator
           </span>
         </div>
-      </transition> -->
+      </transition>
     </div>
     <br />
     <button @click="resetCheckbox">Reset checkbox</button>
@@ -78,10 +78,16 @@
 
 <script lang="ts">
 import { computed, defineComponent, ref } from "@vue/composition-api";
+import nokSVGComponent from "@/assets/icons/cancel.vue";
+import checkmarkSVGComponent from "@/assets/icons/checkmark.vue";
 
 export default defineComponent({
   name: "Checkbox",
   template: "#Syn-Checkbox-Button",
+  components: {
+    nokSVGComponent,
+    checkmarkSVGComponent,
+  },
   props: {
     radioValue: {
       type: String,
@@ -90,7 +96,6 @@ export default defineComponent({
   },
   setup(props) {
     const show = ref(true);
-    const leaveTransition = "leaveTransitionCss";
     const activateTransition = "activateTransitionCss";
 
     const condition = (val: string): boolean => {
@@ -106,15 +111,9 @@ export default defineComponent({
     const classSelector = (val: string): string => {
       if (props.radioValue != "" && props.radioValue == val) {
         return activateTransition;
-      } else if (props.radioValue != "" && props.radioValue != val) {
-        return leaveTransition;
       } else {
         return "";
       }
-    };
-
-    const leave = (el: any) => {
-      console.log("leave!! :>> ", el);
     };
 
     const transition = computed((): string => {
@@ -129,7 +128,6 @@ export default defineComponent({
     return {
       transitionComplete,
       transition,
-      leave,
       show,
       resetCheckbox,
       condition,
