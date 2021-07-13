@@ -2,6 +2,7 @@
   box-sizing: border-box;
 }
 
+<<<<<<< HEAD
 .checkbox-wrapper {
   display: flex;
   margin: auto auto;
@@ -64,10 +65,19 @@
   bottom: 0;
   left: 0;
   right: 0;
+=======
+.wrapper {
+  display: flex;
+  margin: auto auto;
+  height: 44px;
+  width: 300px;
+  border-radius: 15px;
+>>>>>>> wip of work
 }
 
 .flex-label {
   border: 1px solid rgba(0, 0, 0, 0.2);
+<<<<<<< HEAD
   flex: 1 0 1em;
   overflow: hidden;
   max-width: 60px;
@@ -90,10 +100,51 @@
   transition: all 0.25s ease;
 }
 
+=======
+  background: #fff;
+  flex: 1 0 1em;
+  overflow: hidden;
+  max-width: 100px;
+  margin-right: -1px;
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wrapper label:first-of-type {
+  border-radius: 9px 0 0 9px;
+}
+
+.wrapper label:last-of-type {
+  border-radius: 0 9px 9px 0;
+}
+
+.wrapper span {
+  text-align: center;
+}
+
+.wrapper label:hover {
+  cursor: pointer;
+}
+
+.operator {
+  margin: auto auto;
+  flex: 1 0 1em;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0 9px 9px 0;
+}
+
+.goingHome-leave-active {
+  transition: all 0.25s ease;
+}
+>>>>>>> wip of work
 .goingHome-enter,
 .goingHome-leave-to {
   flex: 0 1 0em;
   opacity: 0.3;
+<<<<<<< HEAD
 }
 
 .goingHome-enter-to {
@@ -132,10 +183,44 @@
   opacity: 0;
 }
 
+=======
+}
+
+.goingHome-enter-to {
+  opacity: 1;
+}
+
+.goingHome-enter-active {
+  transition: all 0.25s ease;
+}
+
+.activateTransitionCss {
+  min-width: 100px;
+  border-radius: 9px 0 0 9px !important;
+}
+/* Enter and leave animations can use different */
+/* durations and timing functions.              */
+.operator-slide-fade-enter-active {
+  transition: all 0.25s ease;
+}
+
+.operator-slide-fade-leave-active {
+  transition: all 0.25s ease;
+}
+
+.operator-slide-fade-enter, .operator-slide-fade-leave-to
+/* .slide-fade-leave-active below version 2.1.8 */ {
+  transform: translateX(100px);
+  overflow: hidden;
+  opacity: 0;
+}
+
+>>>>>>> wip of work
 input[type="radio"] {
   display: none;
 }
 
+<<<<<<< HEAD
 .opt-ok-active {
   background-color: #689f38;
   color: rgb(255, 255, 255);
@@ -172,4 +257,27 @@ input[type="radio"] {
   .opt-na-inactive:hover {
     font-weight: bold;
   }
+=======
+.opt-ok:hover {
+  stroke-width: 2px;
+  stroke: green;
+}
+
+.opt-nok:hover {
+  stroke-width: 2px;
+  stroke: red;
+}
+
+.opt-na:hover {
+  font-weight: 1000;
+}
+
+#option-1:checked:checked ~ .option-1 span,
+#option-2:checked:checked ~ .option-2 span {
+  color: #fff;
+>>>>>>> wip of work
+}
+
+.logo-img path {
+  fill: rgb(175, 62, 62);
 }
