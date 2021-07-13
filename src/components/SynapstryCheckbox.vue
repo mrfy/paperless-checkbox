@@ -149,6 +149,8 @@ export default defineComponent({
       } else {
         cancelMaskVisible.value = false;
       }
+      console.log(`classes`, val, classes);
+      return classes;
     };
 
     const cancelSelection = () => {

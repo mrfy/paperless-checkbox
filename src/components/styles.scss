@@ -112,28 +112,11 @@
   justify-content: center;
 }
 
-.wrapper label:first-of-type {
-  border-radius: 9px 0 0 9px;
-}
-
-.wrapper label:last-of-type {
-  border-radius: 0 9px 9px 0;
-}
-
-.wrapper span {
-  text-align: center;
-}
-
-.wrapper label:hover {
-  cursor: pointer;
-}
-
 .operator {
-  margin: auto auto;
   flex: 1 0 1em;
   overflow: hidden;
   border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 0 9px 9px 0;
+  border-radius: 0 5px 5px 0;
 }
 
 .goingHome-leave-active {
@@ -194,12 +177,13 @@
   transition: all 0.25s ease;
 }
 
-.activateTransitionCss {
+.activeSelection {
   min-width: 100px;
-  border-radius: 9px 0 0 9px !important;
+  border-radius: 5px 0 0 5px !important;
+  pointer-events: none;
+  transition: all 0.1s ease-in-out;
 }
-/* Enter and leave animations can use different */
-/* durations and timing functions.              */
+
 .operator-slide-fade-enter-active {
   transition: all 0.25s ease;
 }
@@ -208,8 +192,8 @@
   transition: all 0.25s ease;
 }
 
-.operator-slide-fade-enter, .operator-slide-fade-leave-to
-/* .slide-fade-leave-active below version 2.1.8 */ {
+.operator-slide-fade-enter,
+.operator-slide-fade-leave-to {
   transform: translateX(100px);
   overflow: hidden;
   opacity: 0;
@@ -272,12 +256,37 @@ input[type="radio"] {
   font-weight: 1000;
 }
 
+<<<<<<< HEAD
 #option-1:checked:checked ~ .option-1 span,
 #option-2:checked:checked ~ .option-2 span {
   color: #fff;
 >>>>>>> wip of work
+=======
+.ok-active {
+  background-color: green;
+  stroke: rgb(255, 255, 255);
+  fill: white;
 }
 
-.logo-img path {
-  fill: rgb(175, 62, 62);
+.nok-active {
+  background-color: red;
+  stroke: rgb(255, 255, 255);
+  fill: white;
+}
+
+.na-active {
+  background-color: grey;
+  color: white;
+}
+.wrapper label:first-of-type {
+  border-radius: 5px 0 0 5px;
+}
+
+.wrapper label:last-of-type {
+  border-radius: 0 5px 5px 0;
+>>>>>>> on work
+}
+
+.wrapper label:hover {
+  cursor: pointer;
 }
