@@ -126,13 +126,12 @@ export default defineComponent({
             break;
         }
       }
-      console.log(`classes`, val, classes);
       return classes;
     };
 
     const overWrapper = (e: any) => {
       if (props.radioValue != "") {
-        console.log(`e`, e);
+        return "";
       }
     };
 
