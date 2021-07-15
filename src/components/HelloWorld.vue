@@ -4,8 +4,8 @@
 
     <div v-for="type in form_type" :key="type" class="parentClass">
       <span>
-        {{ type }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
-        raport
+        <!-- {{ type }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
+        raport -->
       </span>
       <CheckBox />
     </div>
@@ -25,8 +25,8 @@ export default Vue.extend({
     CheckBox,
   },
   setup() {
-    const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
+    // const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    const form_type = [1];
     return {
       form_type,
     };

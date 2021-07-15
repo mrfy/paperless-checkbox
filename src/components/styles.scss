@@ -4,12 +4,52 @@
   font-family: "Lato", sans-serif;
 }
 
-.wrapper {
+.checkbox-wrapper {
   display: flex;
   margin: auto auto;
   height: 44px;
   width: 300px;
   border-radius: 15px;
+}
+
+.checkbox-wrapper label:first-of-type {
+  border-radius: 5px 0 0 5px;
+}
+
+.checkbox-wrapper label:last-of-type {
+  border-radius: 0 5px 5px 0;
+}
+
+.checkbox-wrapper label:hover {
+  cursor: pointer;
+}
+
+.app-class {
+  display: inline-block;
+  position: relative;
+}
+
+.app-class:hover .back-choice {
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+.back-choice {
+  position: absolute;
+  display: flex;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font: 1.6rem sans-serif;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+  background-color: #9b9b9b;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .flex-label {
@@ -104,15 +144,4 @@ input[type="radio"] {
 .na-active {
   background-color: grey;
   color: white;
-}
-.wrapper label:first-of-type {
-  border-radius: 5px 0 0 5px;
-}
-
-.wrapper label:last-of-type {
-  border-radius: 0 5px 5px 0;
-}
-
-.wrapper label:hover {
-  cursor: pointer;
 }

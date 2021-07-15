@@ -1,70 +1,78 @@
 <template id="Syn-Checkbox-Button">
   <div>
-    <div class="wrapper" @mouseover="overWrapper">
-      <transition name="goingHome">
-        <label
-          class="flex-label opt-ok"
-          v-bind:class="classSelector('ok')"
-          v-show="condition('ok')"
-        >
-          <checkmarkSVGComponent />
-          <input
-            name="select"
-            type="radio"
-            value="ok"
-            id="option-1"
-            v-model="radioValue"
-          />
-        </label>
-      </transition>
+    <div
+      class="app-class"
+      @mouseover="showCancelMask"
+      @mouseout="hideCancelMask"
+      @click="klick"
+    >
+      <div v-if="radioValue != ''" class="back-choice">{{ cancelMsg }}</div>
+      <div class="checkbox-wrapper">
+        <transition name="goingHome">
+          <label
+            class="flex-label opt-ok"
+            v-bind:class="classSelector('ok')"
+            v-show="condition('ok')"
+          >
+            <checkmarkSVGComponent />
+            <input
+              name="select"
+              type="radio"
+              value="ok"
+              id="option-1"
+              v-model="radioValue"
+            />
+          </label>
+        </transition>
 
-      <transition name="goingHome">
-        <label
-          class="flex-label opt-nok"
-          v-bind:class="classSelector('nok')"
-          v-show="condition('nok')"
-        >
-          <nokSVGComponent />
-          <input
-            name="select"
-            type="radio"
-            value="nok"
-            id="option-2"
-            v-model="radioValue"
-          />
-        </label>
-      </transition>
-      <transition name="goingHome">
-        <label
-          class="flex-label opt-na"
-          v-bind:class="classSelector('na')"
-          v-show="condition('na')"
-          >N/A
-          <input
-            name="select"
-            type="radio"
-            value="na"
-            id="option-3"
-            v-model="radioValue"
-          />
-        </label>
-      </transition>
+        <transition name="goingHome">
+          <label
+            class="flex-label opt-nok"
+            v-bind:class="classSelector('nok')"
+            v-show="condition('nok')"
+          >
+            <nokSVGComponent />
+            <input
+              name="select"
+              type="radio"
+              value="nok"
+              id="option-2"
+              v-model="radioValue"
+            />
+          </label>
+        </transition>
+        <transition name="goingHome">
+          <label
+            class="flex-label opt-na"
+            v-bind:class="classSelector('na')"
+            v-show="condition('na')"
+            >N/A
+            <input
+              name="select"
+              type="radio"
+              value="na"
+              id="option-3"
+              v-model="radioValue"
+            />
+          </label>
+        </transition>
 
-      <transition name="operator-slide-fade">
-        <div v-if="radioValue != ''" id="operatordiv" class="operator">
-          <span>
-            J. Smith
-            <br />
-            Operator
-          </span>
-        </div>
-      </transition>
+        <transition name="operator-slide-fade">
+          <div v-if="radioValue != ''" id="operatordiv" class="operator">
+            <span>
+              J. Smith
+              <br />
+              Operator
+            </span>
+          </div>
+        </transition>
+      </div>
     </div>
-    <!-- <br />
+    <br />
     <button @click="resetCheckbox">Reset checkbox</button>
-    <br /> -->
+    <br />
 
-    <!-- {{ radioValue }} -->
+    {{ radioValue }}
     <!-- <div id="example-1">
       <button @click="show = !show">
         Toggle render
@@ -93,8 +101,13 @@ export default defineComponent({
       type: String,
       default: "",
     },
+    cancelMsg: {
+      type: String,
+      default: "< Cancel choice",
+    },
   },
   setup(props) {
+    const clicked = ref(false);
     const show = ref(true);
     const activateTransition = "activeSelection";
 
@@ -129,18 +142,28 @@ export default defineComponent({
       return classes;
     };
 
-    const overWrapper = (e: any) => {
+    const showCancelMask = (e: any) => {
       if (props.radioValue != "") {
         return "";
       }
     };
 
+    const hideCancelMask = (e: any) => {
+      return "";
+    };
+
+    const klick = () => {
+      console.log(`clicik`, clicked.value);
+    };
+
     return {
       show,
+      klick,
       resetCheckbox,
       condition,
       classSelector,
-      overWrapper,
+      showCancelMask,
+      hideCancelMask,
     };
   },
 });
