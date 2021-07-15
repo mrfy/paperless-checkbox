@@ -4,9 +4,10 @@
       class="app-class"
       @mouseover="showCancelMask"
       @mouseout="hideCancelMask"
-      @click="klick"
     >
-      <div v-if="radioValue != ''" class="back-choice">{{ cancelMsg }}</div>
+      <div @click="klick" v-if="radioValue != ''" class="back-choice">
+        {{ cancelMsg }}
+      </div>
       <div class="checkbox-wrapper">
         <transition name="goingHome">
           <label
@@ -57,7 +58,7 @@
           </label>
         </transition>
 
-        <transition name="operator-slide-fade">
+        <transition name="operator-slide">
           <div v-if="radioValue != ''" id="operatordiv" class="operator">
             <span>
               J. Smith
@@ -72,7 +73,6 @@
     <button @click="resetCheckbox">Reset checkbox</button>
     <br />
 
-    {{ radioValue }}
     <!-- <div id="example-1">
       <button @click="show = !show">
         Toggle render
@@ -85,7 +85,7 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, ref } from "@vue/composition-api";
+import { defineComponent, ref, watch, watchEffect } from "@vue/composition-api";
 import nokSVGComponent from "@/assets/icons/cancel.vue";
 import checkmarkSVGComponent from "@/assets/icons/checkmark.vue";
 
@@ -96,34 +96,36 @@ export default defineComponent({
     nokSVGComponent,
     checkmarkSVGComponent,
   },
+  emits: ["radioVal"],
   props: {
-    radioValue: {
-      type: String,
-      default: "",
-    },
     cancelMsg: {
       type: String,
       default: "< Cancel choice",
     },
   },
-  setup(props) {
+  setup(props, { emit }) {
     const clicked = ref(false);
     const show = ref(true);
+    const radioValue = ref("");
     const activateTransition = "activeSelection";
 
+    watch(radioValue, (currentValue) => {
+      emit("checkboxValue", currentValue);
+    });
+
     const condition = (val: string): boolean => {
-      if (props.radioValue == "" || props.radioValue == val) {
+      if (radioValue.value == "" || radioValue.value == val) {
         return true;
       } else {
         return false;
       }
     };
     const resetCheckbox = () => {
-      props.radioValue = "";
+      radioValue.value = "";
     };
     const classSelector = (val: string): string[] => {
       const classes = [];
-      if (props.radioValue == val) {
+      if (radioValue.value == val) {
         classes.push(activateTransition);
         switch (val) {
           case "ok":
@@ -143,20 +145,21 @@ export default defineComponent({
     };
 
     const showCancelMask = (e: any) => {
-      if (props.radioValue != "") {
+      if (radioValue.value != "") {
         return "";
       }
     };
 
     const hideCancelMask = (e: any) => {
-      return "";
+      // console.log("hide mask");
     };
 
     const klick = () => {
-      console.log(`clicik`, clicked.value);
+      radioValue.value = "";
     };
 
     return {
+      radioValue,
       show,
       klick,
       resetCheckbox,
