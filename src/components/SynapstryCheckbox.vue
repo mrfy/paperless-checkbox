@@ -101,6 +101,10 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    cancelMsg: {
+      type: String,
+      default: "< Cancel choice",
+    },
   },
   setup(_, { emit }) {
     const cancelMaskVisible = ref<boolean>(false);
@@ -160,6 +164,14 @@ export default defineComponent({
 
     const onClickOutside = () => {
       cancelMaskVisible.value = false;
+    };
+
+    const hideCancelMask = (e: any) => {
+      return "";
+    };
+
+    const klick = () => {
+      console.log(`clicik`, clicked.value);
     };
 
     return {
