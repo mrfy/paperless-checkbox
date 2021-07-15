@@ -167,11 +167,11 @@ export default defineComponent({
     };
 
     const hideCancelMask = (e: any) => {
-      return "";
+      // console.log("hide mask");
     };
 
     const klick = () => {
-      console.log(`clicik`, clicked.value);
+      radioValue.value = "";
     };
 
     return {
