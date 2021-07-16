@@ -1,8 +1,7 @@
 <template>
   <div class="hello">
-    <h1>{{ msg }}</h1>
+    <h2>{{ msg }} <span>(cancel on second-click)</span></h2>
 
-    <div class="left">dasda</div>
     <div v-for="type in form_type" :key="type" class="parentClass">
       <span>
         {{ type }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
@@ -12,7 +11,6 @@
       <br />
       <!-- {{ checked }} -->
     </div>
-    <div class="right">adsd</div>
   </div>
 </template>
 
@@ -22,7 +20,7 @@ import CheckBox from "@/components/SynapstryCheckbox.vue";
 import { ref } from "@vue/composition-api";
 
 export default Vue.extend({
-  name: "HelloWorld",
+  name: "SandBox",
   props: {
     msg: String,
   },
@@ -31,8 +29,8 @@ export default Vue.extend({
   },
   setup() {
     const checked = ref("");
-    // const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    const form_type = [1];
+    const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+    // const form_type = [1];
 
     function setCheckboxVal(val: string) {
       checked.value = val;
@@ -50,6 +48,9 @@ export default Vue.extend({
 <style scoped>
 .hello {
   display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 h3 {
   margin: 40px 0 0;
@@ -65,19 +66,12 @@ li {
 a {
   color: #42b983;
 }
-.right {
-  background-color: #42b983;
-}
 
-.left {
-  background-color: tomato;
-}
 .parentClass {
   display: flex;
-  /* flex-direction: column; */
   justify-content: center;
   align-items: center;
-  margin: 1em 1em;
+  margin: auto auto;
 }
 .parentClass span {
   margin-right: 20px;

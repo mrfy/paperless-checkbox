@@ -29,11 +29,6 @@
   position: relative;
 }
 
-.app-class:hover .back-choice {
-  opacity: 0.9;
-  cursor: pointer;
-}
-
 .back-choice {
   position: absolute;
   display: flex;
@@ -46,7 +41,7 @@
   color: white;
   font: 1.6rem sans-serif;
   font-weight: bold;
-  opacity: 0;
+  opacity: 1;
   transition: opacity 0.5s ease;
   background-color: #9b9b9b;
   border-radius: 5px 5px 5px 5px;
@@ -110,20 +105,6 @@ input[type="radio"] {
   display: none;
 }
 
-.opt-ok:hover {
-  stroke-width: 2px;
-  stroke: green;
-}
-
-.opt-nok:hover {
-  stroke-width: 2px;
-  stroke: red;
-}
-
-.opt-na:hover {
-  font-weight: 1000;
-}
-
 .ok-active {
   background-color: green;
   stroke: rgb(255, 255, 255);
@@ -139,4 +120,28 @@ input[type="radio"] {
 .na-active {
   background-color: grey;
   color: white;
+}
+
+/*
+  Dosplay hover for no-touch devices only
+*/
+@media (hover: hover) and (pointer: fine) {
+  .app-class:hover .back-choice {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
+  .opt-ok:hover {
+    stroke-width: 2px;
+    stroke: green;
+  }
+
+  .opt-nok:hover {
+    stroke-width: 2px;
+    stroke: red;
+  }
+
+  .opt-na:hover {
+    font-weight: 1000;
+  }
 }

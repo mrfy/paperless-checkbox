@@ -1,17 +1,17 @@
 <template>
   <div id="app">
-    <HelloWorld msg="Paperless checkbox" />
+    <SandBox msg="Paperless checkbox " />
   </div>
 </template>
 
 <script lang="ts">
 import Vue from "vue";
-import HelloWorld from "./components/HelloWorld.vue";
+import SandBox from "./components/SandBox.vue";
 
 export default Vue.extend({
   name: "App",
   components: {
-    HelloWorld,
+    SandBox,
   },
 });
 </script>

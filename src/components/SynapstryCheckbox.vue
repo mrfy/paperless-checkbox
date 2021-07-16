@@ -1,19 +1,26 @@
 <template id="Syn-Checkbox-Button">
   <div>
     <div
-      class="app-class"
-      @mouseover="showCancelMask"
-      @mouseout="hideCancelMask"
+      class="app-class outside-click-exclude"
+      @click="showCancelMask"
+      v-outside-click="{
+        exclude: ['outside-click-exclude'],
+        handler: hideCancelMask,
+      }"
     >
-      <div @click="klick" v-if="radioValue != ''" class="back-choice">
+      <div
+        v-if="cancelMaskVisible"
+        @click="cancelSelection"
+        class="back-choice outside-click-exclude"
+      >
         {{ cancelMsg }}
       </div>
-      <div class="checkbox-wrapper">
+      <div class="checkbox-wrapper outside-click-exclude">
         <transition name="goingHome">
           <label
             class="flex-label opt-ok"
             v-bind:class="classSelector('ok')"
-            v-show="condition('ok')"
+            v-show="inputShowCondition('ok')"
           >
             <checkmarkSVGComponent />
             <input
@@ -30,7 +37,7 @@
           <label
             class="flex-label opt-nok"
             v-bind:class="classSelector('nok')"
-            v-show="condition('nok')"
+            v-show="inputShowCondition('nok')"
           >
             <nokSVGComponent />
             <input
@@ -46,7 +53,7 @@
           <label
             class="flex-label opt-na"
             v-bind:class="classSelector('na')"
-            v-show="condition('na')"
+            v-show="inputShowCondition('na')"
             >N/A
             <input
               name="select"
@@ -59,8 +66,12 @@
         </transition>
 
         <transition name="operator-slide">
-          <div v-if="radioValue != ''" id="operatordiv" class="operator">
-            <span>
+          <div
+            v-if="radioValue != ''"
+            id="operatordiv"
+            class="operator outside-click-exclude"
+          >
+            <span class="outside-click-exclude">
               J. Smith
               <br />
               Operator
@@ -70,24 +81,16 @@
       </div>
     </div>
     <br />
-    <button @click="resetCheckbox">Reset checkbox</button>
+    <!-- <button @click="resetCheckbox">Reset checkbox</button> -->
     <br />
-
-    <!-- <div id="example-1">
-      <button @click="show = !show">
-        Toggle render
-      </button>
-      <transition name="slide-fade">
-        <p v-if="show">hello</p>
-      </transition>
-    </div> -->
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch, watchEffect } from "@vue/composition-api";
+import { defineComponent, onMounted, ref, watch } from "@vue/composition-api";
 import nokSVGComponent from "@/assets/icons/cancel.vue";
 import checkmarkSVGComponent from "@/assets/icons/checkmark.vue";
+import closable from "@/components/closable-directive";
 
 export default defineComponent({
   name: "Checkbox",
@@ -95,6 +98,9 @@ export default defineComponent({
   components: {
     nokSVGComponent,
     checkmarkSVGComponent,
+  },
+  directives: {
+    "outside-click": closable,
   },
   emits: ["radioVal"],
   props: {
@@ -104,8 +110,7 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const clicked = ref(false);
-    const show = ref(true);
+    const cancelMaskVisible = ref(false);
     const radioValue = ref("");
     const activateTransition = "activeSelection";
 
@@ -113,7 +118,7 @@ export default defineComponent({
       emit("checkboxValue", currentValue);
     });
 
-    const condition = (val: string): boolean => {
+    const inputShowCondition = (val: string): boolean => {
       if (radioValue.value == "" || radioValue.value == val) {
         return true;
       } else {
@@ -146,24 +151,25 @@ export default defineComponent({
 
     const showCancelMask = (e: any) => {
       if (radioValue.value != "") {
-        return "";
+        cancelMaskVisible.value = true;
+      } else {
+        cancelMaskVisible.value = false;
       }
     };
 
-    const hideCancelMask = (e: any) => {
-      // console.log("hide mask");
+    const hideCancelMask = () => {
+      cancelMaskVisible.value = false;
     };
-
-    const klick = () => {
+    const cancelSelection = () => {
       radioValue.value = "";
     };
 
     return {
       radioValue,
-      show,
-      klick,
+      cancelMaskVisible,
+      cancelSelection,
       resetCheckbox,
-      condition,
+      inputShowCondition,
       classSelector,
       showCancelMask,
       hideCancelMask,
