@@ -149,3 +149,27 @@ input[type="radio"] {
     font-weight: bold;
   }
 }
+
+/*
+  Dosplay hover for no-touch devices only
+*/
+@media (hover: hover) and (pointer: fine) {
+  .app-class:hover .back-choice {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
+  .opt-ok:hover {
+    stroke-width: 2px;
+    stroke: green;
+  }
+
+  .opt-nok:hover {
+    stroke-width: 2px;
+    stroke: red;
+  }
+
+  .opt-na:hover {
+    font-weight: 1000;
+  }
+}

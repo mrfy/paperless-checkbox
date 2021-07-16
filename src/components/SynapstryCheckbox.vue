@@ -88,6 +88,9 @@ export default defineComponent({
   directives: {
     clickOutside: vClickOutside.directive,
   },
+  directives: {
+    "outside-click": closable,
+  },
   emits: ["radioVal"],
   props: {
     cancelMsg: {
@@ -166,11 +169,10 @@ export default defineComponent({
       cancelMaskVisible.value = false;
     };
 
-    const hideCancelMask = (e: any) => {
-      // console.log("hide mask");
+    const hideCancelMask = () => {
+      cancelMaskVisible.value = false;
     };
-
-    const klick = () => {
+    const cancelSelection = () => {
       radioValue.value = "";
     };
 
