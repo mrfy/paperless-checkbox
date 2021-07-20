@@ -169,14 +169,12 @@ export default defineComponent({
       cancelMaskVisible.value = false;
     };
 
-    const hideCancelMask = () => {
-      cancelMaskVisible.value = false;
-    };
     const cancelSelection = () => {
+      cancelMaskVisible.value = false;
       radioValue.value = "";
     };
 
-    const onClickOutside = (event: Event) => {
+    const onClickOutside = () => {
       cancelMaskVisible.value = false;
     };
 

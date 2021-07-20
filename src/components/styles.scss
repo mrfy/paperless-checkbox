@@ -159,17 +159,17 @@ input[type="radio"] {
     cursor: pointer;
   }
 
-  .opt-ok:hover {
+  .opt-ok-inactive:hover {
     stroke-width: 2px;
     stroke: green;
   }
 
-  .opt-nok:hover {
+  .opt-nok-inactive:hover {
     stroke-width: 2px;
     stroke: red;
   }
 
-  .opt-na:hover {
+  .opt-na-inactive:hover {
     font-weight: 1000;
   }
 }
