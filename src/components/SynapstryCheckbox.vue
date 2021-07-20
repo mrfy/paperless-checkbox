@@ -1,21 +1,22 @@
 <template id="Syn-Checkbox-Button">
   <div>
-    <div
-      class="app-class outside-click-exclude"
-      @click="showCancelMask"
-      v-click-outside="onClickOutside"
-    >
-      <div
-        v-if="cancelMaskVisible"
-        @click="cancelSelection"
-        class="back-choice outside-click-exclude"
-      >
-        {{ cancelMsg }}
+    <div class="app-class" v-click-outside="onClickOutside">
+      <div class="cancel-choice-wrapper" v-if="cancelMaskVisible">
+        <label class="flex-label cancel-choice-icon" @click="cancelSelection">
+          {{ cancelMsg }}
+        </label>
+        <div class="checkbox-msg">
+          <span v-bind:style="{ fontSize: '1.3rem' }">
+            Cancel choice
+          </span>
+        </div>
       </div>
-      <div class="checkbox-wrapper outside-click-exclude">
+
+      <div class="checkbox-wrapper">
         <transition name="goingHome">
           <label
-            class="flex-label opt-ok"
+            @click="showCancelMask"
+            class="flex-label"
             v-bind:class="classSelector('ok')"
             v-show="inputShowCondition('ok')"
           >
@@ -32,7 +33,8 @@
 
         <transition name="goingHome">
           <label
-            class="flex-label opt-nok"
+            @click="showCancelMask"
+            class="flex-label"
             v-bind:class="classSelector('nok')"
             v-show="inputShowCondition('nok')"
           >
@@ -48,7 +50,8 @@
         </transition>
         <transition name="goingHome">
           <label
-            class="flex-label opt-na"
+            @click="showCancelMask"
+            class="flex-label"
             v-bind:class="classSelector('na')"
             v-show="inputShowCondition('na')"
             >N/A
@@ -62,13 +65,9 @@
           </label>
         </transition>
 
-        <transition name="operator-slide">
-          <div
-            v-if="radioValue != ''"
-            id="operatordiv"
-            class="operator outside-click-exclude"
-          >
-            <span class="outside-click-exclude">
+        <transition name="checkbox-msg-slide">
+          <div v-if="radioValue != ''" class="checkbox-msg">
+            <span>
               J. Smith
               <br />
               Operator
@@ -77,9 +76,6 @@
         </transition>
       </div>
     </div>
-    <br />
-    <!-- <button @click="resetCheckbox">Reset checkbox</button> -->
-    <br />
   </div>
 </template>
 
@@ -103,13 +99,13 @@ export default defineComponent({
   props: {
     cancelMsg: {
       type: String,
-      default: "< Cancel choice",
+      default: "<",
     },
   },
   setup(props, { emit }) {
     const cancelMaskVisible = ref(false);
     const radioValue = ref("");
-    const activateTransition = "activeSelection";
+    const activateClassName = "active-selection";
 
     watch(radioValue, (currentValue) => {
       emit("checkboxValue", currentValue);
@@ -127,17 +123,18 @@ export default defineComponent({
     };
     const classSelector = (val: string): string[] => {
       const classes: string[] = [];
+      radioValue.value == "" ? classes.push(`opt-${val}-inactive`) : "";
       if (radioValue.value == val) {
-        classes.push(activateTransition);
+        classes.push(activateClassName);
         switch (val) {
           case "ok":
-            classes.push(`${val}-active`);
+            classes.push(`opt-${val}-active`);
             break;
           case "nok":
-            classes.push(`${val}-active`);
+            classes.push(`opt-${val}-active`);
             break;
           case "na":
-            classes.push(`${val}-active`);
+            classes.push(`opt-${val}-active`);
             break;
           default:
             break;
@@ -146,7 +143,7 @@ export default defineComponent({
       return classes;
     };
 
-    const showCancelMask = (e: any) => {
+    const showCancelMask = () => {
       if (radioValue.value != "") {
         cancelMaskVisible.value = true;
       } else {
@@ -154,14 +151,12 @@ export default defineComponent({
       }
     };
 
-    const hideCancelMask = () => {
-      cancelMaskVisible.value = false;
-    };
     const cancelSelection = () => {
+      cancelMaskVisible.value = false;
       radioValue.value = "";
     };
 
-    const onClickOutside = (event: Event) => {
+    const onClickOutside = () => {
       cancelMaskVisible.value = false;
     };
 
@@ -173,7 +168,6 @@ export default defineComponent({
       inputShowCondition,
       classSelector,
       showCancelMask,
-      hideCancelMask,
       onClickOutside,
     };
   },

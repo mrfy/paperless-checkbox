@@ -30,7 +30,7 @@ export default Vue.extend({
   setup() {
     const checked = ref("");
     const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-    // const form_type = [1];
+    //const form_type = [1];
 
     function setCheckboxVal(val: string) {
       checked.value = val;
@@ -71,7 +71,7 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: auto auto;
+  margin: 10px;
 }
 .parentClass span {
   margin-right: 20px;

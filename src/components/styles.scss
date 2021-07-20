@@ -28,28 +28,24 @@
   display: inline-block;
   position: relative;
 }
+.cancel-choice-icon {
+  font-size: 2.4rem !important;
+  color: rgb(255, 255, 255);
+  background-color: grey;
+  border-radius: 5px 0 0 5px;
+}
 
-.back-choice {
+.cancel-choice-wrapper {
   position: absolute;
   display: flex;
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font: 1.6rem sans-serif;
-  font-weight: bold;
-  opacity: 1;
-  transition: opacity 0.5s ease;
-  background-color: #9b9b9b;
-  border-radius: 5px 5px 5px 5px;
 }
 
 .flex-label {
   border: 1px solid rgba(0, 0, 0, 0.2);
-  background: #fff;
   flex: 1 0 1em;
   overflow: hidden;
   max-width: 100px;
@@ -78,24 +74,28 @@
   transition: all 0.25s ease;
 }
 
-.activeSelection {
+.active-selection {
   min-width: 100px;
   border-radius: 5px 0 0 5px !important;
-  pointer-events: none;
   transition: all 0.1s ease-in-out;
 }
-.operator {
+.checkbox-msg {
+  display: flex;
   flex: 1 0 1em;
+  flex-direction: column;
   border: 1px solid rgba(0, 0, 0, 0.2);
   border-radius: 0 5px 5px 0;
+  background-color: rgb(255, 255, 255);
+  justify-content: center;
+  align-items: center;
 }
 
-.operator-slide-leave-active {
+.checkbox-msg-slide-leave-active {
   transition: all 0.25s ease;
 }
 
-.operator-slide-enter,
-.operator-slide-leave-to {
+.checkbox-msg-slide-enter,
+.checkbox-msg-slide-leave-to {
   flex: 0 1 0em;
   overflow: hidden;
   opacity: 0;
@@ -105,19 +105,19 @@ input[type="radio"] {
   display: none;
 }
 
-.ok-active {
+.opt-ok-active {
   background-color: green;
   stroke: rgb(255, 255, 255);
-  fill: white;
+  fill: rgb(255, 255, 255);
 }
 
-.nok-active {
+.opt-nok-active {
   background-color: red;
   stroke: rgb(255, 255, 255);
-  fill: white;
+  fill: rgb(255, 255, 255);
 }
 
-.na-active {
+.opt-na-active {
   background-color: grey;
   color: white;
 }
@@ -126,22 +126,21 @@ input[type="radio"] {
   Dosplay hover for no-touch devices only
 */
 @media (hover: hover) and (pointer: fine) {
-  .app-class:hover .back-choice {
-    opacity: 0.9;
+  .app-class:hover .cancel-choice-icon {
     cursor: pointer;
   }
 
-  .opt-ok:hover {
+  .opt-ok-inactive:hover {
     stroke-width: 2px;
     stroke: green;
   }
 
-  .opt-nok:hover {
+  .opt-nok-inactive:hover {
     stroke-width: 2px;
     stroke: red;
   }
 
-  .opt-na:hover {
+  .opt-na-inactive:hover {
     font-weight: 1000;
   }
 }
