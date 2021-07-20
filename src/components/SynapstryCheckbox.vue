@@ -3,10 +3,7 @@
     <div
       class="app-class outside-click-exclude"
       @click="showCancelMask"
-      v-outside-click="{
-        exclude: ['outside-click-exclude'],
-        handler: hideCancelMask,
-      }"
+      v-click-outside="onClickOutside"
     >
       <div
         v-if="cancelMaskVisible"
@@ -87,10 +84,10 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, onMounted, ref, watch } from "@vue/composition-api";
+import { defineComponent, ref, watch } from "@vue/composition-api";
 import nokSVGComponent from "@/assets/icons/cancel.vue";
 import checkmarkSVGComponent from "@/assets/icons/checkmark.vue";
-import closable from "@/components/closable-directive";
+import vClickOutside from "v-click-outside";
 
 export default defineComponent({
   name: "Checkbox",
@@ -100,7 +97,7 @@ export default defineComponent({
     checkmarkSVGComponent,
   },
   directives: {
-    "outside-click": closable,
+    clickOutside: vClickOutside.directive,
   },
   emits: ["radioVal"],
   props: {
@@ -129,7 +126,7 @@ export default defineComponent({
       radioValue.value = "";
     };
     const classSelector = (val: string): string[] => {
-      const classes = [];
+      const classes: string[] = [];
       if (radioValue.value == val) {
         classes.push(activateTransition);
         switch (val) {
@@ -164,6 +161,10 @@ export default defineComponent({
       radioValue.value = "";
     };
 
+    const onClickOutside = (event: Event) => {
+      cancelMaskVisible.value = false;
+    };
+
     return {
       radioValue,
       cancelMaskVisible,
@@ -173,6 +174,7 @@ export default defineComponent({
       classSelector,
       showCancelMask,
       hideCancelMask,
+      onClickOutside,
     };
   },
 });
