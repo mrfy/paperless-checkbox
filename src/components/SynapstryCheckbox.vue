@@ -6,7 +6,7 @@
           {{ cancelMsg }}
         </label>
         <div class="checkbox-msg">
-          <span v-bind:style="{ fontSize: '1.3rem' }">
+          <span v-bind:style="{ fontSize: '1.2rem' }">
             Cancel choice
           </span>
         </div>
@@ -67,11 +67,9 @@
 
         <transition name="checkbox-msg-slide">
           <div v-if="radioValue != ''" class="checkbox-msg">
-            <span>
-              J. Smith
-              <br />
-              Operator
-            </span>
+            {{ data.operator }}
+            <br />
+            {{ data.role }}
           </div>
         </transition>
       </div>
@@ -100,6 +98,9 @@ export default defineComponent({
     cancelMsg: {
       type: String,
       default: "<",
+    },
+    data: {
+      type: Object,
     },
   },
   setup(props, { emit }) {

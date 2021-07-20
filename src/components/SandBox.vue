@@ -2,12 +2,12 @@
   <div class="hello">
     <h2>{{ msg }} <span>(cancel on second-click)</span></h2>
 
-    <div v-for="type in form_type" :key="type" class="parentClass">
+    <div v-for="row in data" :key="row.id" class="parentClass">
       <span>
-        {{ type }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
+        {{ row.id }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
         raport
       </span>
-      <CheckBox @checkboxValue="setCheckboxVal" :key="type" />
+      <CheckBox @checkboxValue="setCheckboxVal" :key="row.id" :data="row" />
       <br />
       <!-- {{ checked }} -->
     </div>
@@ -29,6 +29,32 @@ export default Vue.extend({
   },
   setup() {
     const checked = ref("");
+    const data = [
+      {
+        id: 1,
+        operator: "J. Smith",
+        state: "ok",
+        role: "operator",
+      },
+      {
+        id: 2,
+        operator: "J. Smith",
+        state: "ok",
+        role: "operator",
+      },
+      {
+        id: 3,
+        operator: "A. Johnson",
+        state: "nok",
+        role: "operator",
+      },
+      {
+        id: 4,
+        operator: "M. Anderson",
+        state: "nok",
+        role: "operator",
+      },
+    ];
     const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     //const form_type = [1];
 
@@ -39,6 +65,7 @@ export default Vue.extend({
       setCheckboxVal,
       form_type,
       checked,
+      data,
     };
   },
 });
