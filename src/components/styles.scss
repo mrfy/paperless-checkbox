@@ -165,11 +165,11 @@ input[type="radio"] {
   }
 
   .opt-nok-inactive:hover {
-    stroke-width: 2px;
-    stroke: red;
+    text-shadow: 1px 0px 0px #d32f2f;
+    color: #d32f2f;
   }
 
   .opt-na-inactive:hover {
-    font-weight: 1000;
+    font-weight: bold;
   }
 }
