@@ -20,7 +20,7 @@
             v-bind:class="classSelector('ok')"
             v-show="inputShowCondition('ok')"
           >
-            <checkmarkSVGComponent />
+            <i class="pi pi-check" style="fontSize: 1.4rem"></i>
             <input
               name="select"
               type="radio"
@@ -38,7 +38,7 @@
             v-bind:class="classSelector('nok')"
             v-show="inputShowCondition('nok')"
           >
-            <nokSVGComponent />
+            <i class="pi pi-times" style="fontSize: 1.3rem"></i>
             <input
               name="select"
               type="radio"
@@ -79,17 +79,11 @@
 
 <script lang="ts">
 import { defineComponent, ref, watch } from "@vue/composition-api";
-import nokSVGComponent from "@/assets/icons/cancel.vue";
-import checkmarkSVGComponent from "@/assets/icons/checkmark.vue";
 import vClickOutside from "v-click-outside";
 
 export default defineComponent({
   name: "Checkbox",
   template: "#Syn-Checkbox-Button",
-  components: {
-    nokSVGComponent,
-    checkmarkSVGComponent,
-  },
   directives: {
     clickOutside: vClickOutside.directive,
   },

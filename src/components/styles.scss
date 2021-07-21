@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css?family=Lato:400,500,600,700&display=swap");
+@import "~primeicons/primeicons.css";
+
 * {
   box-sizing: border-box;
   font-family: "Lato", sans-serif;
@@ -107,15 +108,13 @@ input[type="radio"] {
 }
 
 .opt-ok-active {
-  background-color: green;
-  stroke: rgb(255, 255, 255);
-  fill: rgb(255, 255, 255);
+  background-color: #689f38;
+  color: rgb(255, 255, 255);
 }
 
 .opt-nok-active {
-  background-color: red;
-  stroke: rgb(255, 255, 255);
-  fill: rgb(255, 255, 255);
+  background-color: #d32f2f;
+  color: rgb(255, 255, 255);
 }
 
 .opt-na-active {
@@ -132,16 +131,16 @@ input[type="radio"] {
   }
 
   .opt-ok-inactive:hover {
-    stroke-width: 2px;
-    stroke: green;
+    text-shadow: 1px 0px 0px #689f38;
+    color: #689f38;
   }
 
   .opt-nok-inactive:hover {
-    stroke-width: 2px;
-    stroke: red;
+    text-shadow: 1px 0px 0px #d32f2f;
+    color: #d32f2f;
   }
 
   .opt-na-inactive:hover {
-    font-weight: 1000;
+    font-weight: bold;
   }
 }

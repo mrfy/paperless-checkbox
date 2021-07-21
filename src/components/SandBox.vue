@@ -1,6 +1,6 @@
 <template>
   <div class="hello">
-    <h2>{{ msg }} <span>(cancel on second-click)</span></h2>
+    <h2>{{ msg }}<span>(cancel on second-click)</span></h2>
 
     <div v-for="row in data" :key="row.id" class="parentClass">
       <span>
