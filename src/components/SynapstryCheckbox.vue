@@ -6,18 +6,18 @@
           {{ cancelMsg }}
         </label>
         <div class="checkbox-msg">
-          <span v-bind:style="{ fontSize: '1.2rem' }">
+          <span v-bind:style="{ fontSize: '1rem' }">
             Cancel choice
           </span>
         </div>
       </div>
 
-      <div class="checkbox-wrapper">
+      <div class="checkbox-wrapper" v-bind:class="disabled ? 'disabled' : ''">
         <transition name="goingHome">
           <label
             @click="showCancelMask"
             class="flex-label"
-            v-bind:class="classSelector('ok')"
+            v-bind:class="[classSelector('ok')]"
             v-show="inputShowCondition('ok')"
           >
             <i class="pi pi-check" style="fontSize: 1.4rem"></i>
@@ -95,6 +95,10 @@ export default defineComponent({
     },
     data: {
       type: Object,
+    },
+    disabled: {
+      type: Boolean,
+      default: false,
     },
   },
   setup(props, { emit }) {

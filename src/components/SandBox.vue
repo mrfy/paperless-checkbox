@@ -7,7 +7,12 @@
         {{ row.id }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
         raport
       </span>
-      <CheckBox @checkboxValue="setCheckboxVal" :key="row.id" :data="row" />
+      <CheckBox
+        @checkboxValue="setCheckboxVal"
+        :key="row.id"
+        :data="row"
+        :disabled="row.isDisabled"
+      />
       <br />
       <!-- {{ checked }} -->
     </div>
@@ -35,24 +40,38 @@ export default Vue.extend({
         operator: "J. Smith",
         state: "ok",
         role: "operator",
+        isDisabled: false,
       },
       {
         id: 2,
         operator: "J. Smith",
         state: "ok",
         role: "operator",
+        isDisabled: false,
       },
       {
         id: 3,
         operator: "A. Johnson",
         state: "nok",
         role: "operator",
+        isDisabled: true,
       },
       {
         id: 4,
         operator: "M. Anderson",
         state: "nok",
         role: "operator",
+        isDisabled: false,
+      },
+    ];
+
+    const data1 = [
+      {
+        id: 1,
+        operator: "J. Smith",
+        state: "ok",
+        role: "operator",
+        isDisabled: true,
       },
     ];
     const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];

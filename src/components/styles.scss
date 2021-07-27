@@ -50,11 +50,19 @@
   flex: 1 0 1em;
   overflow: hidden;
   max-width: 60px;
-  margin-right: -1px;
   font-size: large;
+  margin-right: -1px;
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.disabled {
+  cursor: not-allowed !important;
+  pointer-events: none !important;
+  opacity: 0.3;
+  background-color: #ccc;
+  border-radius: 5px 5px 5px 5px;
 }
 
 .goingHome-leave-active {
