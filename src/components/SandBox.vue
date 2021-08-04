@@ -10,6 +10,7 @@
         v-bind:key="row.id"
         v-bind:modelValue="val"
         v-bind:data="row"
+        v-bind:options="availableOptions"
         v-bind:disabled="row.isDisabled"
         @checkboxValue="setCheckboxVal"
       />
@@ -32,7 +33,8 @@ export default defineComponent({
   },
   setup() {
     const checked = ref("");
-    const val = ref("ok");
+    const val = ref("");
+    const availableOptions = ["ok", "nok"];
     watch(val, (current) => {
       console.log("wartosc!! ", current);
     });
@@ -85,6 +87,7 @@ export default defineComponent({
     }
     return {
       setCheckboxVal,
+      availableOptions,
       form_type,
       checked,
       data,

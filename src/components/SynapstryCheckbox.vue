@@ -112,12 +112,21 @@ export default defineComponent({
       default: null,
       required: false,
     },
+    options: {
+      type: Array,
+      default: () => {
+        return ["ok", "nok", "na"];
+      },
+      required: false,
+    },
   },
   setup(props, { emit }) {
     let { modelValue } = toRefs(props);
+    console.log("options!!", props.options);
 
     const cancelMaskVisible = ref<boolean>(false);
     const radioValue = ref<string>("");
+
     radioValue.value = modelValue.value ? modelValue.value : "";
 
     watch(radioValue, (currentValue) => {
