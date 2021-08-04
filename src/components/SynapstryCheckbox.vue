@@ -118,7 +118,7 @@ export default defineComponent({
 
     const cancelMaskVisible = ref<boolean>(false);
     const radioValue = ref<string>("");
-    radioValue.value = modelValue.value;
+    radioValue.value = modelValue.value ? modelValue.value : "";
 
     watch(radioValue, (currentValue) => {
       emit("update:modelValue", currentValue);

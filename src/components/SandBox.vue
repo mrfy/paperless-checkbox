@@ -1,7 +1,6 @@
 <template>
   <div class="hello">
     <h2>{{ msg }}<span>(cancel on second-click)</span></h2>
-
     <div v-for="row in data" class="parentClass" :key="row.id">
       <span>
         {{ row.id }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
@@ -33,7 +32,7 @@ export default defineComponent({
   },
   setup() {
     const checked = ref("");
-    const val = ref("nok");
+    const val = ref("ok");
     watch(val, (current) => {
       console.log("wartosc!! ", current);
     });
