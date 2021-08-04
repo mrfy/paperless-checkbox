@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
+import { defineComponent } from "vue";
 import SandBox from "./components/SandBox.vue";
 
-export default Vue.extend({
+export default defineComponent({
   name: "App",
   components: {
     SandBox,

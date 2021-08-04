@@ -1,7 +1,4 @@
-
-
 * {
-  box-sizing: border-box;
 }
 
 .checkbox-wrapper {
@@ -140,6 +137,30 @@ input[type="radio"] {
   .opt-ok-inactive:hover {
     text-shadow: 1px 0px 0px #689f38;
     color: #689f38;
+  }
+
+  .opt-nok-inactive:hover {
+    text-shadow: 1px 0px 0px #d32f2f;
+    color: #d32f2f;
+  }
+
+  .opt-na-inactive:hover {
+    font-weight: bold;
+  }
+}
+
+/*
+  Dosplay hover for no-touch devices only
+*/
+@media (hover: hover) and (pointer: fine) {
+  .app-class:hover .back-choice {
+    opacity: 0.9;
+    cursor: pointer;
+  }
+
+  .opt-ok-inactive:hover {
+    stroke-width: 2px;
+    stroke: green;
   }
 
   .opt-nok-inactive:hover {

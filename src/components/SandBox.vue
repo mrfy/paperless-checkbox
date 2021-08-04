@@ -21,11 +21,10 @@
 </template>
 
 <script lang="ts">
-import Vue from "vue";
 import CheckBox from "@/components/SynapstryCheckbox.vue";
-import { ref } from "@vue/composition-api";
+import { ref, defineComponent } from "vue";
 
-export default Vue.extend({
+export default defineComponent({
   name: "SandBox",
   props: {
     msg: String,
@@ -66,15 +65,6 @@ export default Vue.extend({
       },
     ];
 
-    const data1 = [
-      {
-        id: 1,
-        operator: "J. Smith",
-        state: "ok",
-        role: "operator",
-        isDisabled: true,
-      },
-    ];
     const form_type = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
     //const form_type = [1];
 

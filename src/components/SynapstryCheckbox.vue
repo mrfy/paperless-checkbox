@@ -78,13 +78,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "@vue/composition-api";
-import vClickOutside from "v-click-outside";
+import { defineComponent, ref, watch } from "vue";
+import vClickOutside from "click-outside-vue3";
 import "primeicons/primeicons.css";
 
 export default defineComponent({
   name: "Checkbox",
   template: "#Syn-Checkbox-Button",
+  directives: {
+    clickOutside: vClickOutside.directive,
+  },
   directives: {
     clickOutside: vClickOutside.directive,
   },
@@ -101,14 +104,18 @@ export default defineComponent({
       type: Boolean,
       default: false,
     },
+    cancelMsg: {
+      type: String,
+      default: "< Cancel choice",
+    },
   },
   setup(_, { emit }) {
-    const cancelMaskVisible = ref(false);
-    const radioValue = ref("");
+    const cancelMaskVisible = ref<boolean>(false);
+    const radioValue = ref<string>("");
     const activateClassName = "active-selection";
 
-    watch(radioValue, (currentValue) => {
-      emit("checkboxValue", currentValue);
+    watch(radioValue, (currentValue: string) => {
+      emit("checkboxValue" as any, currentValue);
     });
 
     const inputShowCondition = (val: string): boolean => {
@@ -149,6 +156,17 @@ export default defineComponent({
       } else {
         cancelMaskVisible.value = false;
       }
+      console.log(`classes`, val, classes);
+      return classes;
+    };
+
+    const cancelSelection = () => {
+      cancelMaskVisible.value = false;
+      radioValue.value = "";
+    };
+
+    const onClickOutside = () => {
+      cancelMaskVisible.value = false;
     };
 
     const cancelSelection = () => {
