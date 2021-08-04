@@ -1,17 +1,18 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+  <div id="app">
+    <SandBox msg="Paperless checkbox " />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
-import HelloWorld from './components/HelloWorld.vue';
+import { defineComponent } from "vue";
+import SandBox from "./components/SandBox.vue";
 
 export default defineComponent({
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
+    SandBox,
+  },
 });
 </script>
 
