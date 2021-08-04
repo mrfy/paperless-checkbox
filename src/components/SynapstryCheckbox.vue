@@ -1,6 +1,6 @@
 <template id="SynConfirmationCheckbox">
   <div>
-    <div class="app-class" v-click-outside="onClickOutside">
+    <div v-click-outside="onClickOutside" class="app-class">
       <div class="cancel-choice-wrapper" v-if="cancelMaskVisible">
         <label class="flex-label cancel-choice-icon" @click="cancelSelection">
           {{ cancelMsg }}
@@ -22,9 +22,9 @@
             <input
               name="select"
               type="radio"
-              value="ok"
-              id="option-1"
               v-model="radioValue"
+              id="option-1"
+              value="ok"
             />
           </label>
         </transition>
@@ -75,7 +75,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, watch } from "vue";
+import { defineComponent, ref, toRefs, watch } from "vue";
 import vClickOutside from "click-outside-vue3";
 import "primeicons/primeicons.css";
 
@@ -88,8 +88,8 @@ type DataType = {
 };
 
 export default defineComponent({
-  name: "ConfirmationCheckbox",
   template: "#SynConfirmationCheckbox",
+  name: "ConfirmationCheckbox",
   directives: {
     clickOutside: vClickOutside.directive,
   },
@@ -114,25 +114,13 @@ export default defineComponent({
     },
   },
   setup(props, { emit }) {
-    const cancelMaskVisible = ref(false);
+    let { modelValue } = toRefs(props);
+
+    const cancelMaskVisible = ref<boolean>(false);
     const radioValue = ref<string>("");
+    radioValue.value = modelValue.value;
 
-    const activateClassName = "active-selection";
-
-    watch(props, () => {
-      console.log(
-        "🚀 ~ file: ConfirmationCheckbox.vue ~ line 118 ~ setup ~ radioValue",
-        radioValue.value,
-        props.modelValue
-      );
-      radioValue.value = props.modelValue;
-    });
-
-    watch(radioValue as any, (currentValue) => {
-      console.log(
-        "🚀 ~ file: ConfirmationCheckbox.vue ~ line 129 ~ watch ~ currentValue",
-        currentValue
-      );
+    watch(radioValue, (currentValue) => {
       emit("update:modelValue", currentValue);
     });
 
@@ -143,29 +131,27 @@ export default defineComponent({
         return false;
       }
     };
-    const resetCheckbox = () => {
-      radioValue.value = "";
-    };
+
     const classSelector = (val: string): string[] => {
-      const classes: string[] = [];
-      radioValue.value == "" ? classes.push(`opt-${val}-inactive`) : "";
+      const cssClasses: string[] = [];
+      radioValue.value == "" ? cssClasses.push(`opt-${val}-inactive`) : "";
       if (radioValue.value == val) {
-        classes.push(activateClassName);
+        cssClasses.push("active-selection");
         switch (val) {
           case "ok":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           case "nok":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           case "na":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           default:
             break;
         }
       }
-      return classes;
+      return cssClasses;
     };
     const showCancelMask = () => {
       if (radioValue.value === "") {
@@ -185,7 +171,6 @@ export default defineComponent({
       radioValue,
       cancelMaskVisible,
       cancelSelection,
-      resetCheckbox,
       inputShowCondition,
       classSelector,
       showCancelMask,

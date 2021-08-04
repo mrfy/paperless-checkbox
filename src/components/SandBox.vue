@@ -2,64 +2,77 @@
   <div class="hello">
     <h2>{{ msg }}<span>(cancel on second-click)</span></h2>
 
-    <div v-for="row in data" :key="row.id" class="parentClass">
+    <div v-for="row in data" class="parentClass" :key="row.id">
       <span>
         {{ row.id }}. Wyłączyć maszynę, wykonac serwis, przegląd, sporządzić
         raport
       </span>
       <CheckBox
+        v-bind:key="row.id"
+        v-bind:modelValue="val"
+        v-bind:data="row"
+        v-bind:disabled="row.isDisabled"
         @checkboxValue="setCheckboxVal"
-        v-model:value="eventValue"
-        :key="row.id"
-        :data="row"
-        :disabled="row.isDisabled"
       />
       <br />
-      <!-- {{ checked }} -->
     </div>
   </div>
 </template>
 
 <script lang="ts">
 import CheckBox from "@/components/SynapstryCheckbox.vue";
-import { ref, defineComponent } from "vue";
+import { ref, defineComponent, watch } from "vue";
 
 export default defineComponent({
   name: "SandBox",
-  props: {
-    msg: String,
-  },
   components: {
     CheckBox,
   },
+  props: {
+    msg: { type: String, default: "" },
+  },
   setup() {
     const checked = ref("");
+    const val = ref("nok");
+    watch(val, (current) => {
+      console.log("wartosc!! ", current);
+    });
+    // const data = [
+    //   {
+    //     id: 1,
+    //     operator: "J. Smith",
+    //     state: "ok",
+    //     role: "operator",
+    //     isDisabled: false,
+    //   },
+    //   {
+    //     id: 2,
+    //     operator: "J. Smith",
+    //     state: "ok",
+    //     role: "operator",
+    //     isDisabled: false,
+    //   },
+    //   {
+    //     id: 3,
+    //     operator: "A. Johnson",
+    //     state: "nok",
+    //     role: "operator",
+    //     isDisabled: true,
+    //   },
+    //   {
+    //     id: 4,
+    //     operator: "M. Anderson",
+    //     state: "nok",
+    //     role: "operator",
+    //     isDisabled: false,
+    //   },
+    // ];
+
     const data = [
       {
         id: 1,
         operator: "J. Smith",
         state: "ok",
-        role: "operator",
-        isDisabled: false,
-      },
-      {
-        id: 2,
-        operator: "J. Smith",
-        state: "ok",
-        role: "operator",
-        isDisabled: false,
-      },
-      {
-        id: 3,
-        operator: "A. Johnson",
-        state: "nok",
-        role: "operator",
-        isDisabled: true,
-      },
-      {
-        id: 4,
-        operator: "M. Anderson",
-        state: "nok",
         role: "operator",
         isDisabled: false,
       },
@@ -76,6 +89,7 @@ export default defineComponent({
       form_type,
       checked,
       data,
+      val,
     };
   },
 });
