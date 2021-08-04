@@ -9,6 +9,7 @@
       </span>
       <CheckBox
         @checkboxValue="setCheckboxVal"
+        v-model:value="eventValue"
         :key="row.id"
         :data="row"
         :disabled="row.isDisabled"
