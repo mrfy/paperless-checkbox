@@ -80,6 +80,7 @@
 <script lang="ts">
 import { defineComponent, ref, watch } from "@vue/composition-api";
 import vClickOutside from "v-click-outside";
+import "primeicons/primeicons.css";
 
 export default defineComponent({
   name: "Checkbox",
@@ -101,7 +102,7 @@ export default defineComponent({
       default: false,
     },
   },
-  setup(props, { emit }) {
+  setup(_, { emit }) {
     const cancelMaskVisible = ref(false);
     const radioValue = ref("");
     const activateClassName = "active-selection";
@@ -121,25 +122,25 @@ export default defineComponent({
       radioValue.value = "";
     };
     const classSelector = (val: string): string[] => {
-      const classes: string[] = [];
-      radioValue.value == "" ? classes.push(`opt-${val}-inactive`) : "";
+      const cssClasses: string[] = [];
+      radioValue.value == "" ? cssClasses.push(`opt-${val}-inactive`) : "";
       if (radioValue.value == val) {
-        classes.push(activateClassName);
+        cssClasses.push(activateClassName);
         switch (val) {
           case "ok":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           case "nok":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           case "na":
-            classes.push(`opt-${val}-active`);
+            cssClasses.push(`opt-${val}-active`);
             break;
           default:
             break;
         }
       }
-      return classes;
+      return cssClasses;
     };
 
     const showCancelMask = () => {
