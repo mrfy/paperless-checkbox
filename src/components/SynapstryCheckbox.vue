@@ -1,6 +1,6 @@
 <template id="SynConfirmationCheckbox">
   <div>
-    <div v-click-outside="onClickOutside" class="app-class">
+    <div class="app-class" v-click-outside="onClickOutside">
       <div class="cancel-choice-wrapper" v-if="cancelMaskVisible">
         <label class="flex-label cancel-choice-icon" @click="cancelSelection">
           {{ cancelMsg }}
@@ -76,7 +76,8 @@
 
 <script lang="ts">
 import { defineComponent, ref, toRefs, watch } from "vue";
-import vClickOutside from "click-outside-vue3";
+import { directive } from "vue3-click-away";
+
 import "primeicons/primeicons.css";
 
 type DataType = {
@@ -93,7 +94,7 @@ export default defineComponent({
   template: "#SynConfirmationCheckbox",
   name: "ConfirmationCheckbox",
   directives: {
-    clickOutside: vClickOutside.directive,
+    clickOutside: directive,
   },
   emits: ["update:modelValue"],
   props: {
