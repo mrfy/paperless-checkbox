@@ -34,7 +34,7 @@ export default defineComponent({
   setup() {
     const checked = ref("");
     const val = ref("");
-    const availableOptions = ["ok", "nok"];
+    const availableOptions = ["nok", "ok"];
     watch(val, (current) => {
       console.log("wartosc!! ", current);
     });

@@ -16,7 +16,7 @@
             @click="showCancelMask"
             class="flex-label"
             v-bind:class="classSelector('ok')"
-            v-show="inputShowCondition('ok')"
+            v-if="inputShowCondition('ok')"
           >
             <i class="pi pi-check" style="fontsize: 1.4rem"></i>
             <input
@@ -33,7 +33,7 @@
             @click="showCancelMask"
             class="flex-label"
             v-bind:class="classSelector('nok')"
-            v-show="inputShowCondition('nok')"
+            v-if="inputShowCondition('nok')"
           >
             <i class="pi pi-times" style="fontsize: 1.3rem"></i>
             <input
@@ -50,7 +50,7 @@
             @click="showCancelMask"
             class="flex-label"
             v-bind:class="classSelector('na')"
-            v-show="inputShowCondition('na')"
+            v-if="inputShowCondition('na')"
             >N/A
             <input
               name="select"
@@ -87,6 +87,8 @@ type DataType = {
   isDisabled: boolean;
 };
 
+const availableOptions = ["ok", "nok", "na"];
+
 export default defineComponent({
   template: "#SynConfirmationCheckbox",
   name: "ConfirmationCheckbox",
@@ -115,14 +117,12 @@ export default defineComponent({
     options: {
       type: Array,
       default: () => {
-        return ["ok", "nok", "na"];
+        return availableOptions;
       },
-      required: false,
     },
   },
   setup(props, { emit }) {
     let { modelValue } = toRefs(props);
-    console.log("options!!", props.options);
 
     const cancelMaskVisible = ref<boolean>(false);
     const radioValue = ref<string>("");
@@ -134,7 +134,10 @@ export default defineComponent({
     });
 
     const inputShowCondition = (val: string): boolean => {
-      if (radioValue.value == "" || radioValue.value == val) {
+      if (
+        (radioValue.value == "" || radioValue.value == val) &&
+        props.options.includes(val)
+      ) {
         return true;
       } else {
         return false;
